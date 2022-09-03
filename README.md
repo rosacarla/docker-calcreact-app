@@ -56,7 +56,7 @@ docker build -t sample:dev .
 ```
 docker run -v "C:/caminho/da/pasta/do/projeto/no/seu/computador":/app -v /app/node_modules -p 3001:3000 --rm sample:dev
 ```
-- Se se execução for bem sucedida, será seguida por mensagem com o seguinte conteúdo:
+- Se a execução for concluída com êxito, é seguida por mensagem com o seguinte conteúdo:
 ```
 > docker-nome-do-react-app@0.1.0 start /app
 > react-scripts start
