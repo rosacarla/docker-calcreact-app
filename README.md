@@ -78,7 +78,7 @@ Note that the development build is not optimized.
 To create a production build, use yarn build.
 ```
 
-###### *OBSERVAÇÃO: O endereço de IP "http://127.12.0.2:3000" é fictício, em ambiente real representa o endereço interno que o Docker atribuiu ao container.*
+###### *OBSERVAÇÃO: O endereço de IP "http://127.12.0.2:3000" é fictício, em ambiente real representa o endereço interno que o Docker atribui ao container.*
 
 - O parâmetro ```-p``` exporta a porta 3001 para a máquina local, que pode ser acessada pelo navegador ao digitar:
 ```
