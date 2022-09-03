@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Getting Started with Docker CalcReact App!  
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+--- 
 
-## Available Scripts
+## Para rodar a aplicação do React em container do Docker  
 
-In the project directory, you can run:
+- Entrar no diretório onde o projeto será armazenado (pasta C, Documentos ou outra de sua escolha) e executar essa linha de comando:  
 
-### `npm start`
+```
+npx create-react-app nome-do-react-app
+```  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Entrar na pasta do projeto criado:  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+cd nome-do-react-app
+```  
 
-### `npm test`
+- Acrescentar um arquivo com nome **Dockerfile** na raiz do projeto (não pode ter nenhuma extensão, como .txt, .doc etc).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Dentro do **Dockerfile** copiar este script:  
 
-### `npm run build`
+```
+# Imagem de Origem (verificar nº da versão atualizada do Node e do react-script!)
+FROM node:16-alpine
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Diretório de trabalho (local em que a aplicação fica dentro do container)
+WORKDIR /app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Adiciona `/app/node_modules/.bin` para o $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Instala dependências da aplicação e armazena em cache
+COPY package.json /app/package.json
+RUN npm install --silent
+RUN npm install react-scripts@5.0.1 -g --silent
 
-### `npm run eject`
+# Inicializa a aplicação
+CMD ["npm", "start"]
+```  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+###### *OBSERVAÇÃO: É opcional usAR ```--silent``` para silenciar a saída da instalação dos pacotes NPM, pois pode ocultar problemas no funcionamento desses pacotes.*   
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Criar um arquivo com nome **.dockerignore** na pasta do projeto e, dentro dele, incluir:  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```node_modules/```
+###### *OBSERVAÇÃO: Deste modo, o diretório de modulos do Node não é enviado para a Deamon do Docker, o que diminui o tempo de construção da imagem.*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Construir a imagem para o Docker com acréscimo de uma tag (-t):
+```
+docker build -t sample:dev .
+```
 
-## Learn More
+- Depois de construída a imagem, é preciso criar o container a partir dela com este comando (para uso no Windows, substituir o caminho e retirar as aspas):
+```
+docker run -v "C:/caminho/da/pasta/do/projeto/no/seu/computador":/app -v /app/node_modules -p 3001:3000 --rm sample:dev
+```
+- Se se execução for bem sucedida, será seguida por mensagem com o seguinte conteúdo:
+```
+> docker-nome-do-react-app@0.1.0 start /app
+> react-scripts start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ℹ ｢wds｣: Project is running at http://127.12.0.2/
+ℹ ｢wds｣: webpack output is served from /
+ℹ ｢wds｣: Content not from webpack is served from /app/public
+ℹ ｢wds｣: 404s will fallback to /index.html
+Starting the development server…
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Compiled successfully!
 
-### Code Splitting
+You can now view dockerized-react-app in the browser.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Local: http://localhost:3000/
+On Your Network: http://127.12.0.2:3000/
 
-### Analyzing the Bundle Size
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+###### *OBSERVAÇÃO: O endereço de IP "http://127.12.0.2:3000" é fictício, em ambiente real representa o endereço interno que o Docker atribuiu ao container.*
 
-### Making a Progressive Web App
+- O parâmetro ```-p``` exporta a porta 3001 para a máquina local, que pode ser acessada pelo navegador ao digitar:
+```
+localhost:3001
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Por fim, deste modo, é possível visualizar a página inicial da aplicação React que, aqui neste caso, é uma calculadora:  
 
-### Advanced Configuration
+<p align="center"> 
+<img src="https://github.com/rosacarla/docker-calcreact-app/blob/master/images/localhost-3001-calc.png" width="880">
+</p>  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---  
 
-### Deployment
+## Autora  
+Carla Edila Silveira  
+Contato: rosa.carla@pucpr.edu.br  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---  
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
