@@ -1,0 +1,26 @@
+.BotaoC {
+    background: #29afb6;
+    display: flex;
+    border: 2px solid rgba(6, 80, 61, 0.05);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    font-size: 30px;
+    color: rgba(53, 52, 52, 0.5);
+    height: 20%;
+    min-width: 25%;
+}
+
+.BotaoC[data-size="2"] {
+    height: 40%; 
+}
+
+.BotaoC[data-value="null"] {
+    pointer-events: none;
+}
+
+.BotaoC:hover {
+    background: #b1edbf;
+    cursor: default;
+}

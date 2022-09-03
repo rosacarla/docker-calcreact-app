@@ -1,0 +1,9 @@
+.VisorC {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #b5c5b7;
+    height: 25%;
+    color: #071f1d;
+    font-size: 36px;
+}
