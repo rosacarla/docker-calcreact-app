@@ -8,7 +8,7 @@ PARSE_MODE="Markdown"
 
 # echo "${CI_JOB_STATUS}"
 
-echo "${CI_JOB_STATUS}"
+echo "${Deploy}"
 
 # echo "${https://t.me/graf_my_bot}"
 # echo "$TELEGRAM_TO"
@@ -21,8 +21,8 @@ echo "${CI_JOB_STATUS}"
 
 MESSAGE="
 -------------------------------------
-GitHub Actions build * ${CI_JOB_STATUS}!*
-\`Repository:  ${docker-calcreact-app}\`
+GitHub Actions build * ${Deploy}!*
+\`Repository:  ${rosacarla/docker-calcreact-app}\`
 \`Branch:      ${master}\`
 *Commit Msg:*
 ${Finalizado!}
@@ -34,4 +34,3 @@ ${Finalizado!}
 # echo "$MESSAGE"
 
 curl -s -X POST ${https://t.me/graf_my_bot} -d chat_id=$TELEGRAM_TO -d text="${MESSAGE}" -d parse_mode=${PARSE_MODE}
-
