@@ -22,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: node App.js
+    - run: npm install
+    - run: docker pull rosacarla/docker-calcreact-app
     - uses: AppThreat/sast-scan-action@master
       with:
         type: "nodejs"
@@ -32,3 +33,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Finalizado!"
+      
+  after_script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: bash ./telegram_notification.sh
