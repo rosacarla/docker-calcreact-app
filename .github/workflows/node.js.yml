@@ -46,6 +46,6 @@ jobs:
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
             
-            Repository: ${{ docker-calcreact-app }}
+            Repository: ${{rosacarla/docker-calcreact-app}}
             
-            See changes: https://github.com/${{ docker-calcreact-app }}
+            See changes: https://github.com/${{rosacarla/docker-calcreact-app}}
