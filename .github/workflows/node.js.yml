@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: npm start
+    - run: node App.js
     - uses: AppThreat/sast-scan-action@master
       with:
         type: "nodejs"
