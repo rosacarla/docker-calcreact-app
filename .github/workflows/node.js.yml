@@ -43,9 +43,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
+            ${{ rosacarla  }} created commit:
+            Commit message: ${{ Finalizado! }}
             
-            Repository: ${{rosacarla/docker-calcreact-app}}
+            Repository: ${{ rosacarla/docker-calcreact-app }}
             
-            See changes: https://github.com/${{rosacarla/docker-calcreact-app}}
+            See changes: https://github.com/${{ rosacarla/docker-calcreact-app }}
