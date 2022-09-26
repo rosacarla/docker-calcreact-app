@@ -34,18 +34,8 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo "Finalizado!"
 
-  build:
+  after_script:
     runs-on: ubuntu-latest
     steps:
-      - name: send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ${{ rosacarla  }} created commit:
-            Commit message: ${{ Finalizado! }}
-            
-            Repository: ${{ rosacarla/docker-calcreact-app }}
-            
-            See changes: https://github.com/${{ rosacarla/docker-calcreact-app }}
+      - uses: actions/checkout@v3
+      - run: bash ./telegram_notification.sh
