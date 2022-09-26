@@ -92,10 +92,8 @@ localhost:3001
 </p>  
 
 ---  
-
 ## Autora  
 Carla Edila Silveira  
 Contato: rosa.carla@pucpr.edu.br  
-
 ---  
 
